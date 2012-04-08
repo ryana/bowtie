@@ -4,17 +4,6 @@ module Bowtie
 
 	class Admin < Sinatra::Base
 
-		use Rack::Auth::Basic do |username, password|
-			begin
-				user = ::BOWTIE_AUTH[:user]
-				pass = ::BOWTIE_AUTH[:pass]
-			rescue NameError
-				user = 'admin'
-				pass = 'bowtie'
-			end
-			username == user && password == pass
-		end
-
 		use Rack::MethodOverride
 
 		set :views, File.dirname(__FILE__) + '/views'
@@ -24,8 +13,11 @@ module Bowtie
 		end
 
 		before do
-			@app_name = ENV['APP_NAME'] ? [self.class.name, ENV['APP_NAME']].join(' > ') : self.class.name
-			@models = Bowtie.models
+			unless authenticated?(:admin)
+                          redirect_to '/'
+                        end
+                        @app_name = ENV['APP_NAME'] ? [self.class.name, ENV['APP_NAME']].join(' > ') : self.class.name
+			@models = [User]
 		end
 
 		get '/*.js|css|png|jpg|ico' do
