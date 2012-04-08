@@ -27,7 +27,7 @@ module Bowtie
 
 		def get_model_class(mod = params[:model])
 			begin
-				Kernel.const_get(mod.singularize.capitalize)
+				Kernel.const_get(mod.singularize.camelize)
 			rescue NameError
 				halt 404, "Model not found!"
 			end

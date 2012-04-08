@@ -10,7 +10,7 @@ http://usefork.com
 }
 
 body{
-	font-size: 14px;
+	font-size: 12px;
 	font-family: Corbel, Calibri, Helvetica, Arial, sans-serif;
 	background: #efefef;
 }
@@ -20,8 +20,8 @@ a { color:#111; }
 .pager a{ color: #528e00; }
 
 p{
-	font-size: 1.2em;
-	margin: 1em 0;
+	font-size: 1em;
+	margin: 3px 0;
 }
 
 hr { border:0; border-top:5px solid #efefef;  margin:15px 0;}
@@ -136,7 +136,7 @@ h2 { margin:10px 0; font-size:130%;}
 }
 
 #container{
-	font-size: 1.3em;
+	font-size: 1em;
 	background: #fff;
 	padding: 20px 50px 50px;
 	position: relative;

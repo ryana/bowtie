@@ -13,16 +13,20 @@ module Bowtie
 		end
 
 		before do
-			unless authenticated?(:admin)
-                          redirect_to '/'
-                        end
+                  if request.path_info != '/error' && !request.env['warden'].authenticated?(:admin)
+                    redirect '/error'
+                  end
                         @app_name = ENV['APP_NAME'] ? [self.class.name, ENV['APP_NAME']].join(' > ') : self.class.name
-			@models = [User]
+			@models = [User, OnBoarding, Wishlist, WishlistSignal, ListPurchase, SfToken, SignaledUrl, CustomerList, UserCustomer]
 		end
 
 		get '/*.js|css|png|jpg|ico' do
 			deliver_file or status 404
 		end
+
+                get '/error' do
+                  "Not authorized! Sorry. <a href='/'>Home</a>"
+                end
 
 		get '/' do
 			# redirect '' results in an endless redirect on the current version of sinatra/rack
@@ -46,6 +50,7 @@ module Bowtie
 			erb :index
 		end
 
+=begin
 		get "/:model/new" do
 			@resource = model.new
 			erb :new
@@ -59,7 +64,7 @@ module Bowtie
 				erb :new
 			end
 		end
-
+=end
 		get "/:model/:id" do
 			@resource = resource
 			erb :show
@@ -81,7 +86,7 @@ module Bowtie
 			end
 
 		end
-
+=begin
 		put "/:model/:id" do
 			if request.xhr? # dont pass through hooks or put the boolean stuff
 				# if Bowtie.update!(resource, params[:resource].normalize)
@@ -107,7 +112,7 @@ module Bowtie
 				redirect "/#{model.linkable}/#{params[:id]}?error=not+destroyed"
 			end
 		end
-
+=end
 	end
 
 end
