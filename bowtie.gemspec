@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version = "0.4.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Tomás Pollak"]
+  s.authors = ["Toms Pollak"]
   s.date = %q{2010-06-06}
   s.description = %q{Simple admin scaffold for MongoMapper and DataMapper models.}
   s.email = %q{tomas@forkhq.com}
